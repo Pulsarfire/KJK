@@ -16,7 +16,10 @@ class Inventory:
             else:
                 for key, value in item.items():
                     result.append(f"{i + 1}. {key}: {value}")
-        return "\n".join(result)            
+        return "\n".join(result)    
+
+    def add(self, addition):
+        self.inventory.append(addition)
 
     @classmethod
     def create(cls):

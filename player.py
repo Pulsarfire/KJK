@@ -1,15 +1,18 @@
+#Player inventory implemented but rooms and other files don't have acces.
+
 from items import dice
-from items import inventory
 from items import Axe
 from items import Knife
+from inventory import Inventory
 
 class Player:
 
-    def __init__(self, name, health, weapon, max_health):
+    def __init__(self, name, health, weapon, max_health, inventory):
         self.name = name
         self.health = health
         self.weapon = weapon
         self.max_health = max_health
+        self.inventory = inventory
        
 
     def __str__(self):
@@ -35,9 +38,11 @@ class Player:
                 else:                
                     input(f"{health}? Wow that is a terrible roll... Here have 5 hp extra. Now chose your weapon.")
                     health += 5
+                inventory = Inventory.create()  
                 weapon = cls.get_weapon()
+                inventory.add(weapon)
                 max_health = health
-                return Player(name, health, weapon, max_health)
+                return Player(name, health, weapon, max_health, inventory)
 
 
     @classmethod            
@@ -46,10 +51,8 @@ class Player:
             user_input = input("\n(1) Axe: D6 with crit. (2) Knife: D8 without crit.\n").strip()
                             
             if user_input == "1":
-                inventory.append("Axe")
                 return "Axe"
             elif user_input == "2":
-                inventory.append("Knife")
                 return "Knife"           
             else: 
                 print("Incorrect input.")
