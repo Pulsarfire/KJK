@@ -2,7 +2,6 @@ import random
 
 inventory = []
 
-
 #Reusable code for any dice
 def dice(side):
     while True:
@@ -14,6 +13,9 @@ def dice(side):
             continue
 
 class Axe:
+
+    def __init__(self):
+        ...
 
     @classmethod
     def deal_dmg(cls):

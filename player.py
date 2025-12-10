@@ -51,9 +51,11 @@ class Player:
             user_input = input("\n(1) Axe: D6 with crit. (2) Knife: D8 without crit.\n").strip()
                             
             if user_input == "1":
-                return "Axe"
+                axe_instance = Axe()
+                return axe_instance
             elif user_input == "2":
-                return "Knife"           
+                knife_instance = Knife()
+                return knife_instance           
             else: 
                 print("Incorrect input.")
                 continue

@@ -1,3 +1,6 @@
+from items import Axe
+from items import Knife
+
 class Inventory:
 
     def __init__(self, inventory):
@@ -6,11 +9,18 @@ class Inventory:
     def __str__(self):
         return self.browse_inv()
 
-    
+    def weapon(self):
+
+        result = []
+        for item in self.inventory:
+            if isinstance(item, (Axe, Knife)):
+                result.append(item)
+        return result
+        
     def browse_inv(self):
         result = []
         for i, item in enumerate(self.inventory):
-            if isinstance(item, str):
+            if isinstance(item, Axe):
                 result.append(f"{i + 1}. {item}")
 
             else:

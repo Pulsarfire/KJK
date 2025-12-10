@@ -43,7 +43,7 @@ def fight_func(player, opponent):
 
     if initiative_result:
         while True:
-            player_turn(opponent)
+            player_turn(player, opponent)
             if opponent.health <= 0:
                 print("Congratulations, you killed the beast.\n")  
                 break
@@ -57,24 +57,25 @@ def fight_func(player, opponent):
             if player.health == 0:
                 print("You died. Game over.\n")
                 sys.exit()
-            player_turn(opponent)
+            player_turn(player, opponent)
             if opponent.health == 0:
                 print("Congratulations, you killed the beast.\n")  
                 break
             
-def player_turn(opponent):
-    if inventory[0] == "Axe":
-        opponent.health -= Axe.deal_dmg()
-        if opponent.health < 0:
-            opponent.health = 0
-        print(f"Their health is {opponent.health}.\n")
+def player_turn(player, opponent):
 
+    for item in player.inventory.weapon():
+        if isinstance(item, Axe):
+            opponent.health -= Axe.deal_dmg()
+            if opponent.health < 0:
+                opponent.health = 0
+            print(f"Their health is {opponent.health}.\n")
           
-    else:
-        opponent.health -= Knife.deal_dmg()
-        if opponent.health < 0:
-            opponent.health = 0
-        print(f"Their health is {opponent.health}.\n")
+        else:
+            opponent.health -= Knife.deal_dmg()
+            if opponent.health < 0:
+                opponent.health = 0
+            print(f"Their health is {opponent.health}.\n")
         
 def opponent_turn(player, opponent):
 
@@ -98,7 +99,7 @@ def initiative():
         print("Your opponent seems to be quicker than you. They start the battle.")
         return False
 
-#Browse inventory
+#Browse inventory(old code, probably needs deleting at some point.)
 def browse_inv():
     for i, item in enumerate(inventory):
         if isinstance(item, str):
