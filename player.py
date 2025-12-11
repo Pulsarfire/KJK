@@ -1,4 +1,7 @@
 #Player inventory implemented but rooms and other files don't have acces.
+#Further improved inventory and also realised all actions will have to be moved into rooms.py as they will be used there. 
+#Also every time there will be a change of "scene", ..._entry() the player will have to be added in as parameter so everything will have access to it.
+
 
 from items import dice
 from items import Axe
@@ -40,7 +43,7 @@ class Player:
                     health += 5
                 inventory = Inventory.create()  
                 weapon = cls.get_weapon()
-                inventory.add(weapon)
+                inventory.add_item(weapon)
                 max_health = health
                 return Player(name, health, weapon, max_health, inventory)
 

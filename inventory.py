@@ -20,7 +20,10 @@ class Inventory:
     def browse_inv(self):
         result = []
         for i, item in enumerate(self.inventory):
-            if isinstance(item, Axe):
+            if isinstance(item, (Axe, Knife)):
+                result.append(f"{i + 1}. {item}")
+
+            elif isinstance(item, str):
                 result.append(f"{i + 1}. {item}")
 
             else:
@@ -28,8 +31,14 @@ class Inventory:
                     result.append(f"{i + 1}. {key}: {value}")
         return "\n".join(result)    
 
-    def add(self, addition):
-        self.inventory.append(addition)
+    def add_item(self, item):
+        self.inventory.append(item)
+
+    def remove_item(self, item):
+        if item in self.inventory:
+            self.inventory.remove(item)
+        else:
+            pass
 
     @classmethod
     def create(cls):
