@@ -1,5 +1,4 @@
 from player import Player
-from items import inventory
 from rooms import Library
 
 
@@ -10,7 +9,7 @@ def main():
     player = Player.create()
     print(player)
     input("Good luck! Press enter to continue.")
-    Library.entry()
+    Library.entry(player)
     
     
 

@@ -14,8 +14,8 @@ def dice(side):
 
 class Axe:
 
-    def __init__(self):
-        ...
+    def __str__(self):
+        return "Axe"
 
     @classmethod
     def deal_dmg(cls):
@@ -29,6 +29,9 @@ class Axe:
             return dmg
 
 class Knife:
+
+    def __str__(self):
+        return "Knife"
    
     @classmethod
     def deal_dmg(cls):

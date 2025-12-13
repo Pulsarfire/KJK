@@ -13,7 +13,7 @@ class Library:
     is_searched = False
 
     @classmethod
-    def entry(cls):
+    def entry(cls, player):
         if cls.library_first:
             input("""
             You blink awake on the cold library floor, the sharp scent of 
@@ -35,34 +35,34 @@ class Library:
 
 
     @classmethod
-    def search(cls):
+    def search(cls, player):
         if not cls.is_searched:
             input("You found a note that has '3714' on it.")
             inventory.append({"Note": "3714"})
             cls.is_searched = True
-            cls.entry()
+            cls.entry(player)
         else:
             input("There is nothing else interesting in the room.")
-            cls.entry()
+            cls.entry(player)
 
     @classmethod
-    def valid_options(cls):
+    def valid_options(cls, player):
         user_choice = action("(E)xplore the room", "(W)ine room", "(S)tudy room")
 
         while True:
             match user_choice:
                 case "E":
-                    Library.search()                    
+                    Library.search(player)                    
                     break
                 case "W":
-                    Wine_room.entry()
+                    Wine_room.entry(player)
                     break
                 case "S":
-                    Study.entry()
+                    Study.entry(player)
                     break
                 case "I":
-                    browse_inv()
-                    Library.entry()
+                    player.inventory.browse_inv()
+                    Library.entry(player)
                     break
                 case _:
                     print("Invalid input.")
