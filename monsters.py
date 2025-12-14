@@ -1,8 +1,5 @@
 import random
 
-class Monster:
-    ...
-
 class Vampire:
 
     def __init__(self, health):

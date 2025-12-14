@@ -45,4 +45,10 @@ class Inventory:
         inventory = []
         return cls(inventory)                
 
-
+#Not sure how I want to implement this yet.
+""" if "Potion" in inventory:
+        user_choice = input("Would you like to drink your potion? (Y/N)").upper().strip()
+        if user_choice == "Y":
+            inventory.remove("Potion")
+            #player.health += 10
+ """
