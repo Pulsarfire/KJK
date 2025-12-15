@@ -189,7 +189,28 @@ class Wine_room:
     def search(cls, player):
         if not cls.is_searched:
             input("You found a potion which can heal you for 10 hp. ")
-            player.inventory.add_item("Potion")
+            if player.health < player.max_health:
+                while True:
+                    user_choice = input("Would you like to drink the potion?(You can't overheal.) (Y/N)").upper().strip()
+                    if user_choice == "Y":
+                        player.health += 10
+                        if player.health > player.max_health:
+                            player.health = player.max_health
+                        print(f" Your health is {player.health}.")
+                        input()
+                        break
+                    elif user_choice == "N":
+                        input("You decide it is not worth drinking it yet, but might be a good idea to remember the location.")
+                        break
+                    else:
+                        input("Invalid input.")
+                        continue
+
+                    
+            else:
+                print("Your health is currently at a maximum, no point of drinking it.")
+
+
             cls.is_searched = True
             cls.entry(player)
         else:
