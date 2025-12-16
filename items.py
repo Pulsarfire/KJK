@@ -1,7 +1,5 @@
 import random
 
-inventory = []
-
 #Reusable code for any dice
 def dice(side):
     while True:

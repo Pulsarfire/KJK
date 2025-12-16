@@ -3,6 +3,9 @@ import random
 from items import dice
 from items import Axe
 from items import Knife
+from monsters import Vampire
+from monsters import Werewolf
+from monsters import Alfred
 
 #Reusable code for optional number of actions 
 #How to use: action("(O)pen", "(C)lose")
@@ -250,19 +253,26 @@ class Study:
     study_first = True
 
     @classmethod
-    def entry(cls):
+    def entry(cls, player):
         if cls.study_first:
-            input("First entry.")
+            input("""
+            Upon entering the study in a manor, you step into a hushed, richly paneled room lined with leather-bound books,
+            where a heavy oak desk sits beneath a tall window, illuminated by soft, natural light. The air carries the scent
+            of old paper and polished wood, evoking an atmosphere of quiet intellect and timeless refinement.
+            \n""")
             cls.study_first = False
         else:
-            input("Not first entry.")
+            input("""
+            Upon looking at the study again, you notice subtle details you missed before—a faint smudge on the windowpane,
+            a book slightly ajar on the shelf, or the way the light now glints off an old candle holder.
+            \n""")
 
 class Cigar_lounge:
 
     cigar_lounge_first = True
     
     @classmethod
-    def entry(cls):
+    def entry(cls, player):
         if cls.cigar_lounge_first:
             input("First entry.")
             cls.cigar_lounge_first = False
@@ -274,7 +284,7 @@ class Master_bedroom:
     master_bedroom = True
     
     @classmethod
-    def entry(cls):
+    def entry(cls, player):
         if cls.master_bedroom:
             input("First entry.")
             cls.master_bedroom = False
@@ -286,7 +296,7 @@ class Kitchen:
     kitchen = True
     
     @classmethod
-    def entry(cls):
+    def entry(cls, player):
         if cls.kitchen:
             input("First entry.")
             cls.kitchen = False
@@ -298,7 +308,7 @@ class Guest_room:
     guest_room = True
     
     @classmethod
-    def entry(cls):
+    def entry(cls, player):
         if cls.guest_room:
             input("First entry.")
             cls.guest_room = False

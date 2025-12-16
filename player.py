@@ -1,8 +1,3 @@
-#Player inventory implemented but rooms and other files don't have acces.
-#Further improved inventory and also realised all actions will have to be moved into rooms.py as they will be used there. 
-#Also every time there will be a change of "scene", ..._entry() the player will have to be added in as parameter so everything will have access to it.
-
-
 from items import dice
 from items import Axe
 from items import Knife
@@ -42,8 +37,7 @@ class Player:
                     input(f"{health}? Wow that is a terrible roll... Here have 5 hp extra. Now chose your weapon.")
                     health += 5
                 inventory = Inventory.create()  
-                weapon = cls.get_weapon()
-                inventory.add_item(weapon)
+                inventory.add_item(cls.get_weapon())
                 max_health = health
                 return Player(name, health, weapon, max_health, inventory)
 
@@ -54,11 +48,9 @@ class Player:
             user_input = input("\n(1) Axe: D6 with crit. (2) Knife: D8 without crit.\n").strip()
                             
             if user_input == "1":
-                axe_instance = Axe()
-                return axe_instance
+                return Axe()
             elif user_input == "2":
-                knife_instance = Knife()
-                return knife_instance           
+                return Knife()           
             else: 
                 print("Incorrect input.")
                 continue
