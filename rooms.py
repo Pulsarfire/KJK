@@ -260,13 +260,49 @@ class Study:
             where a heavy oak desk sits beneath a tall window, illuminated by soft, natural light. The air carries the scent
             of old paper and polished wood, evoking an atmosphere of quiet intellect and timeless refinement.
             \n""")
+            cls.fight(player)
             cls.study_first = False
         else:
             input("""
             Upon looking at the study again, you notice subtle details you missed before—a faint smudge on the windowpane,
-            a book slightly ajar on the shelf, or the way the light now glints off an old candle holder.
+            a book slightly ajar on the shelf, or the way the light now glints off an old candle holder. You have two new doors
+            in front of you. One of them leads you to the guest room the other one to the kitchen.
             \n""")
+            cls.valid_options(player)
+        
+    @classmethod
+    def fight(cls, player):
+        opponent = random.choice(["Vampire", "Werewolf"])
+        input(f"You notice something else too. From the corner of the room a shadow emerges. It is a {opponent}!")
+        if opponent == "Vampire":
+            fight_func(player, Vampire.create())
+        else:
+            fight_func(player, Werewolf.creat())
 
+    @classmethod
+    def valid_options(cls, player):
+        user_choice = action("(G)uest room", "(K)itchen", "(L)ibrary")
+
+        while True:
+            match user_choice:
+                case "G":
+                    Guest_room.entry(player)
+                    break
+                case "K":
+                    Kitchen.entry(player)
+                    break
+                case "L":
+                    Library.entry(player)
+                    break
+                case "I":
+                    print(player.inventory)
+                    input()
+                    Study.entry(player)
+                    break
+                case _:
+                    print("Invalid input.")
+                    continue
+    
 class Cigar_lounge:
 
     cigar_lounge_first = True

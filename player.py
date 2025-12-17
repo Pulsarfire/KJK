@@ -37,7 +37,8 @@ class Player:
                     input(f"{health}? Wow that is a terrible roll... Here have 5 hp extra. Now chose your weapon.")
                     health += 5
                 inventory = Inventory.create()  
-                inventory.add_item(cls.get_weapon())
+                weapon = cls.get_weapon()
+                inventory.add_item(weapon)
                 max_health = health
                 return Player(name, health, weapon, max_health, inventory)
 
