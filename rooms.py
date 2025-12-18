@@ -3,6 +3,7 @@ import random
 from items import dice
 from items import Axe
 from items import Knife
+from items import Cross
 from monsters import Vampire
 from monsters import Werewolf
 from monsters import Alfred
@@ -306,6 +307,7 @@ class Study:
 class Cigar_lounge:
 
     cigar_lounge_first = True
+    is_searched = False
     
     @classmethod
     def entry(cls, player):
@@ -314,6 +316,17 @@ class Cigar_lounge:
             cls.cigar_lounge_first = False
         else:
             input("Not first entry.")
+
+    @classmethod
+    def search(cls, player):
+        if not cls.is_searched:
+            input("You found a Cross. It looks interesting, you put it away.")
+            player.inventory.add_item(Cross())
+            cls.is_searched = True
+            cls.entry(player)
+        else:
+            input("There is nothing else interesting in the room.")
+            cls.entry(player)
 
 class Master_bedroom:
 
@@ -353,4 +366,3 @@ class Guest_room:
 
 class Hidden_room:
     ...
-

@@ -39,12 +39,15 @@ class Knife:
     
 
 class Paper:
-    
+
     @classmethod
     def read_paper(cls):
         return f"🔥Abracadabra Ignis Crux.🔥"
 
 class Cross:
+
+    def __str__(self):
+        return "Cross"
     
     @classmethod
     def place_cross(cls):

@@ -1,5 +1,7 @@
 from items import Axe
 from items import Knife
+from items import Cross
+from items import Paper
 
 class Inventory:
 
@@ -20,7 +22,7 @@ class Inventory:
     def browse_inv(self):
         result = []
         for i, item in enumerate(self.inventory):
-            if isinstance(item, (Axe, Knife)):
+            if isinstance(item, (Axe, Knife, Cross, Paper)):
                 result.append(f"{i + 1}. {item}")
 
             elif isinstance(item, str):
