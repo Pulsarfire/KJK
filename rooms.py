@@ -188,7 +188,7 @@ class Wine_room:
             \n""")
             cls.valid_options(player)
 
-    #Picking up a potion.
+    #Healing.
     @classmethod
     def search(cls, player):
         if not cls.is_searched:
@@ -212,7 +212,7 @@ class Wine_room:
 
                     
             else:
-                print("Your health is currently at a maximum, no point of drinking it.")
+                input("Your health is currently at a maximum, no point of drinking it.")
 
 
             cls.is_searched = True
@@ -312,10 +312,17 @@ class Cigar_lounge:
     @classmethod
     def entry(cls, player):
         if cls.cigar_lounge_first:
-            input("First entry.")
+            input("""
+            The heavy oak door opens to a warm embrace of cedar and aged tobacco, with amber light illuminating leather chairs and a glowing humidor.
+            Jazz hums softly as patrons sip whiskey, their cigars burning like embers in the dim, welcoming haze. No further doors ahead.
+            \n""")
             cls.cigar_lounge_first = False
+            cls.valid_options(player)
         else:
-            input("Not first entry.")
+            input("""
+            The chair is warm, the ashtray bears a fresh extinguished cigar—yours?—and the air holds a lingering breath of smoke.
+            \n""")
+            cls.valid_options(player)
 
     @classmethod
     def search(cls, player):
@@ -328,9 +335,32 @@ class Cigar_lounge:
             input("There is nothing else interesting in the room.")
             cls.entry(player)
 
+    @classmethod
+    def valid_options(cls, player):
+        user_choice = action("(E)xplore the room", "(W)ine Room")
+
+        while True:
+            match user_choice:
+                case "E":
+                    cls.search(player)
+                    break
+                case "W":
+                    Wine_room.entry(player)
+                    break
+                case "I":
+                    print(player.inventory)
+                    input()
+                    Study.entry(player)
+                    break
+                case _:
+                    print("Invalid input.")
+                    continue
+
+    
+
 class Master_bedroom:
 
-    master_bedroom = True
+    master_bedroom_first = True
     
     @classmethod
     def entry(cls, player):
@@ -342,7 +372,7 @@ class Master_bedroom:
 
 class Kitchen:
 
-    kitchen = True
+    kitchen_first = True
     
     @classmethod
     def entry(cls, player):
@@ -354,7 +384,7 @@ class Kitchen:
 
 class Guest_room:
 
-    guest_room = True
+    guest_room_first = True
     
     @classmethod
     def entry(cls, player):
