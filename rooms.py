@@ -379,7 +379,7 @@ class Kitchen:
         if cls.kitchen_first:
             input("""
             You step into the kitchen and it looks like the most ordinary one you've ever seen.
-            Nothing interesting here but it feels like this is the central hub of the house. 
+            There is nothing interesting here but it feels like this is the central hub of the house. 
             You've got a couple of doors here.
             \n""")
             cls.kitchen = False
