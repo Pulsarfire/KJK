@@ -142,9 +142,9 @@ class Library:
 
     @classmethod
     def valid_options(cls, player):
-        user_choice = action("(E)xplore the room", "(W)ine room", "(S)tudy room")
-
+        
         while True:
+            user_choice = action("(E)xplore the room", "(W)ine room", "(S)tudy room")
             match user_choice:
                 case "E":
                     Library.search(player)                    
@@ -224,9 +224,9 @@ class Wine_room:
 
     @classmethod
     def valid_options(cls, player):
-        user_choice = action("(E)xplore the room", "(C)igar lounge", "(M)aster bedroom", "(L)ibrary")
-
+        
         while True:
+            user_choice = action("(E)xplore the room", "(C)igar lounge", "(M)aster bedroom", "(L)ibrary")
             match user_choice:
                 case "E":
                     Wine_room.search(player)                    
@@ -282,9 +282,9 @@ class Study:
 
     @classmethod
     def valid_options(cls, player):
-        user_choice = action("(G)uest room", "(K)itchen", "(L)ibrary")
-
+        
         while True:
+            user_choice = action("(G)uest room", "(K)itchen", "(L)ibrary")
             match user_choice:
                 case "G":
                     Guest_room.entry(player)
@@ -337,9 +337,9 @@ class Cigar_lounge:
 
     @classmethod
     def valid_options(cls, player):
-        user_choice = action("(E)xplore the room", "(W)ine Room")
-
+        
         while True:
+            user_choice = action("(E)xplore the room", "(W)ine Room")
             match user_choice:
                 case "E":
                     cls.search(player)
@@ -376,11 +376,43 @@ class Kitchen:
     
     @classmethod
     def entry(cls, player):
-        if cls.kitchen:
-            input("First entry.")
+        if cls.kitchen_first:
+            input("""
+            You step into the kitchen and it looks like the most ordinary one you've ever seen.
+            Nothing interesting here but it feels like this is the central hub of the house. 
+            You've got a couple of doors here.
+            \n""")
             cls.kitchen = False
+            valid_options(player)
         else:
-            input("Not first entry.")
+            input("""
+            Nothing changed here. The most interesting thing here is the fly on the wall.
+            \n""")
+            valid_options(player)
+
+    @classmethod
+    def valid_options(cls, player):
+        
+        while True:
+            user_choice = action("(S)tudy room", "(M)aster bedroom", "(G)uest room",)
+            match user_choice:
+                case "S":
+                    Study.entry(player)
+                    break
+                case "M":
+                    Master_bedroom.entry(player)
+                    break
+                case "G":
+                    Guest_room.entry(player)
+                    break
+                case "I":
+                    print(player.inventory)
+                    input()
+                    Kitchen.entry(player)
+                    break
+                case _:
+                    print("Invalid input.")
+                    continue
 
 class Guest_room:
 
@@ -388,7 +420,7 @@ class Guest_room:
     
     @classmethod
     def entry(cls, player):
-        if cls.guest_room:
+        if cls.guest_room_first:
             input("First entry.")
             cls.guest_room = False
         else:
