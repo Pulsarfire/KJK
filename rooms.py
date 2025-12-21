@@ -4,6 +4,7 @@ from items import dice
 from items import Axe
 from items import Knife
 from items import Cross
+from items import Paper
 from monsters import Vampire
 from monsters import Werewolf
 from monsters import Alfred
@@ -147,7 +148,7 @@ class Library:
             user_choice = action("(E)xplore the room", "(W)ine room", "(S)tudy room")
             match user_choice:
                 case "E":
-                    Library.search(player)                    
+                    cls.search(player)                    
                     break
                 case "W":
                     Wine_room.entry(player)
@@ -158,7 +159,7 @@ class Library:
                 case "I":
                     print(player.inventory)
                     input()
-                    Library.entry(player)
+                    cls.entry(player)
                     break
                 case _:
                     print("Invalid input.")
@@ -229,7 +230,7 @@ class Wine_room:
             user_choice = action("(E)xplore the room", "(C)igar lounge", "(M)aster bedroom", "(L)ibrary")
             match user_choice:
                 case "E":
-                    Wine_room.search(player)                    
+                    cls.search(player)                    
                     break
                 case "C":
                     Cigar_lounge.entry(player)
@@ -243,7 +244,7 @@ class Wine_room:
                 case "I":
                     print(player.inventory)
                     input()
-                    Wine_room.entry(player)
+                    cls.entry(player)
                     break
                 case _:
                     print("Invalid input.")
@@ -298,7 +299,7 @@ class Study:
                 case "I":
                     print(player.inventory)
                     input()
-                    Study.entry(player)
+                    cls.entry(player)
                     break
                 case _:
                     print("Invalid input.")
@@ -327,7 +328,7 @@ class Cigar_lounge:
     @classmethod
     def search(cls, player):
         if not cls.is_searched:
-            input("You found a Cross. It looks interesting, you put it away.")
+            input("You found a Cross. It looks interesting, so you put it away.")
             player.inventory.add_item(Cross())
             cls.is_searched = True
             cls.entry(player)
@@ -350,7 +351,7 @@ class Cigar_lounge:
                 case "I":
                     print(player.inventory)
                     input()
-                    Study.entry(player)
+                    cls.entry(player)
                     break
                 case _:
                     print("Invalid input.")
@@ -378,17 +379,17 @@ class Kitchen:
     def entry(cls, player):
         if cls.kitchen_first:
             input("""
-            You step into the kitchen and it looks like the most ordinary one you've ever seen.
+            You step into the kitchen, and it looks like the most ordinary one you've ever seen.
             There is nothing interesting here but it feels like this is the central hub of the house. 
             You've got a couple of doors here.
             \n""")
             cls.kitchen = False
-            valid_options(player)
+            cls.valid_options(player)
         else:
             input("""
-            Nothing changed here. The most interesting thing here is the fly on the wall.
+            Nothing has changed here. The most interesting thing is the fly on the wall.
             \n""")
-            valid_options(player)
+            cls.valid_options(player)
 
     @classmethod
     def valid_options(cls, player):
@@ -408,7 +409,7 @@ class Kitchen:
                 case "I":
                     print(player.inventory)
                     input()
-                    Kitchen.entry(player)
+                    cls.entry(player)
                     break
                 case _:
                     print("Invalid input.")
@@ -417,14 +418,60 @@ class Kitchen:
 class Guest_room:
 
     guest_room_first = True
+    is_searched = False
     
     @classmethod
     def entry(cls, player):
         if cls.guest_room_first:
-            input("First entry.")
+            input("""
+            You step into the small guest room and immediately notice its snug,
+            welcoming charm—soft light filters through simple curtains, and a 
+            neatly made bed with fresh linens stands against one wall.
+            \n""")
             cls.guest_room = False
+            cls.valid_options(player)
+            
         else:
-            input("Not first entry.")
+            input("""
+            It is quite obvious the room hasn't been used that often recently. You don't
+            think there have been many guests here over the past few years.
+            \n""")
+            cls.valid_options(player)
+
+    @classmethod
+    def search(cls, player):
+        if not cls.is_searched:
+            input("You found a piece of paper. It has some kind of incantation on it. It reads: Abracadabra Ignis Crux.")
+            player.inventory.add_item(Paper())
+            cls.is_searched = True
+            cls.entry(player)
+        else:
+            input("There is nothing else interesting in the room.")
+            cls.entry(player)
+
+    @classmethod
+    def valid_options(cls, player):
+        
+        while True:
+            user_choice = action("(E)xplore the room", "(S)tudy Room", "(K)itchen")
+            match user_choice:
+                case "E":
+                    cls.search(player)
+                    break
+                case "S":
+                    Study.entry(player)
+                    break
+                case "K":
+                    Kitchen.entry(player)
+                    break
+                case "I":
+                    print(player.inventory)
+                    input()
+                    cls.entry(player)
+                    break
+                case _:
+                    print("Invalid input.")
+                    continue
 
 class Hidden_room:
     ...
